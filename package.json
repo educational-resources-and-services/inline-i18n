@@ -23,6 +23,6 @@
   "homepage": "https://github.com/educational-resources-and-services/inline-i18n#readme",
   "dependencies": {
     "react": "16.2.0",
-    "react-dom": "16.2.0"
+    "react-dom": "16.2.1"
   }
 }
