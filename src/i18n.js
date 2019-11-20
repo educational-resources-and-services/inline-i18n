@@ -22,8 +22,6 @@
 
 */
 
-const fs = require("fs")
-
 const textToHtml = textString => {
   let htmlEncoded = textString
     .replace(/&/g, "&amp;")
@@ -39,7 +37,7 @@ const allTranslations = {}
 let globalLocale = 'en'
 const fetchAttemptedLocales = ['en']
 const categorySpecificLocales = {}
-let fetchLocale, localesUrl, localesDir, determineLocaleFromOptions, translationsToDump
+let fetchLocale, localesUrl, localesReadFileSync, determineLocaleFromOptions, translationsToDump
 let translationModifier = str => str
 
 // get determineUILanguageId and setUpI18n from elsewhere, when I develop it
@@ -47,7 +45,7 @@ let translationModifier = str => str
 const i18nSetup = ({ locales, prepDump, hydrate, ...params }) => new Promise(resolve => {
   fetchLocale = params.fetchLocale
   localesUrl = params.localesUrl
-  localesDir = params.localesDir
+  localesReadFileSync = params.localesReadFileSync
   determineLocaleFromOptions = params.determineLocaleFromOptions
   translationModifier = params.translationModifier || translationModifier
 
@@ -116,8 +114,8 @@ const i18nPrefetch = locale => new Promise(resolve => {
             })
           )
   
-      } else if(localesDir) {
-        const contents = fs.readFileSync(`${localesDir}/${locale}.json`)
+      } else if(localesReadFileSync) {
+        const contents = localesReadFileSync()
         allTranslations[locale] = getTranslationsWithoutCategories(JSON.parse(contents))
       }
 
