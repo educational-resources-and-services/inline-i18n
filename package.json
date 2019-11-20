@@ -2,7 +2,7 @@
   "name": "inline-i18n",
   "version": "0.0.1",
   "description": "An i18n solution which keeps the English text inline within your code—where it should be. Works with frontend JavaScript, within React (including component swaps), and on Node.js.",
-  "main": "src/i18n.js",
+  "main": "build/i18n.js",
   "scripts": {
     "start": "webpack --watch",
     "build": "webpack --mode production",
