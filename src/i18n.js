@@ -115,7 +115,7 @@ const i18nPrefetch = locale => new Promise(resolve => {
           )
   
       } else if(localesReadFileSync) {
-        const contents = localesReadFileSync()
+        const contents = localesReadFileSync(locale)
         allTranslations[locale] = getTranslationsWithoutCategories(JSON.parse(contents))
       }
 
