@@ -1,5 +1,9 @@
-let TRANSLATIONS_DIR = './translations'
+const path = require('path');
+const fs = require('fs')
+
 const TRANSLATION_NEEDED = "TRANSLATION NEEDED"
+const BASE_DIR = path.resolve(__dirname, '../../..')
+let TRANSLATIONS_DIR = './translations'
 
 process.argv.forEach(option => {
   const [ flag, value ] = option.split(/=/)
@@ -13,15 +17,13 @@ process.argv.forEach(option => {
   }
 })
 
-const fs = require('fs')
-
 console.log('')
 console.log('Preparing to create csv translation files from json...')
 console.log('')
 
 let defaultTranslationObj = {}
 
-fs.readdir(TRANSLATIONS_DIR, (err, files) => {
+fs.readdir(`${BASE_DIR}/${TRANSLATIONS_DIR}`, (err, files) => {
   if(!err) {
     files.forEach((file, index) => {
       if(!/-incomplete\.json$/.test(file)) return
@@ -35,7 +37,7 @@ fs.readdir(TRANSLATIONS_DIR, (err, files) => {
         `NOTES (do NOT modify)`,
       ]]
 
-      const translationObj = JSON.parse(fs.readFileSync(`${TRANSLATIONS_DIR}/${file}`, 'utf8'))
+      const translationObj = JSON.parse(fs.readFileSync(`${BASE_DIR}/${TRANSLATIONS_DIR}/${file}`, 'utf8'))
       
       for(let category in translationObj) {
         for(let engText in translationObj[category]) {
@@ -72,7 +74,7 @@ fs.readdir(TRANSLATIONS_DIR, (err, files) => {
         )
         .join("\n")
 
-      fs.writeFileSync(`${TRANSLATIONS_DIR}/${file.replace(/\.json$/, '.csv')}`, csvContent)
+      fs.writeFileSync(`${BASE_DIR}/${TRANSLATIONS_DIR}/${file.replace(/\.json$/, '.csv')}`, csvContent)
       console.log(`Created csv file: ${file.replace(/\.json$/, '.csv')}.`)
     })
   } 

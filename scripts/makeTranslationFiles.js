@@ -1,3 +1,9 @@
+const path = require('path');
+const findInFiles = require('find-in-files')
+const fs = require('fs')
+
+const TRANSLATION_NEEDED = "TRANSLATION NEEDED"
+const BASE_DIR = path.resolve(__dirname, '../../..')
 let PARSE_DIRS = [ 'src' ]
 let EXCLUDE_REGEX = /^$/
 let TRANSLATIONS_DIR = './translations'
@@ -44,11 +50,6 @@ process.argv.forEach(option => {
   The i18n/i18nReact function parameters: str, desc, category, swaps, options
 
 */
-
-const findInFiles = require('find-in-files')
-const fs = require('fs')
-
-const TRANSLATION_NEEDED = "TRANSLATION NEEDED"
 
 console.log('')
 console.log('Preparing to create translations needed files...')
@@ -125,14 +126,14 @@ Promise.all(PARSE_DIRS.map(dir => new Promise(resolve => {
   }
 
   // for each translation file (except English)
-  fs.readdir(TRANSLATIONS_DIR, (err, files) => {
+  fs.readdir(`${BASE_DIR}/${TRANSLATIONS_DIR}`, (err, files) => {
     if(!err) {
       files.forEach((file, index) => {
         if(['en.json'].includes(file)) return
         if(files.includes(file.replace(/\.json$/, '-incomplete.json'))) return
 
         const lang = file.replace(/(?:\-incomplete)?\.json$/, '')
-        const translationObj = JSON.parse(fs.readFileSync(`${TRANSLATIONS_DIR}/${file}`, 'utf8'))
+        const translationObj = JSON.parse(fs.readFileSync(`${BASE_DIR}/${TRANSLATIONS_DIR}/${file}`, 'utf8'))
         const newTranslationObj = JSON.parse(JSON.stringify(defaultTranslationObj))
         
         // fill in the default json where language variables are missing
@@ -191,7 +192,7 @@ Promise.all(PARSE_DIRS.map(dir => new Promise(resolve => {
         const incompleteFileContent = JSON.stringify(newTranslationObj, null, '\t')
 
         if(incompleteFileContent.indexOf(TRANSLATION_NEEDED) !== -1) {
-          fs.writeFileSync(`${TRANSLATIONS_DIR}/${lang}-incomplete.json`, incompleteFileContent)
+          fs.writeFileSync(`${BASE_DIR}/${TRANSLATIONS_DIR}/${lang}-incomplete.json`, incompleteFileContent)
           langsGettingNewFile.push(lang)
         } else {
           langsNotGettingNewFile.push(lang)

@@ -1,3 +1,8 @@
+const path = require('path');
+const fs = require('fs')
+const csv = require('csv-parser')
+
+const BASE_DIR = path.resolve(__dirname, '../../..')
 let TRANSLATIONS_DIR = './translations'
 
 process.argv.forEach(option => {
@@ -12,9 +17,6 @@ process.argv.forEach(option => {
   }
 })
 
-const fs = require('fs')
-const csv = require('csv-parser')
-
 console.log('')
 console.log('Preparing to create json translation files from csv...')
 console.log('')
@@ -22,7 +24,7 @@ console.log('')
 let defaultTranslationObj = {}
 let filesToParse = []
 
-fs.readdir(TRANSLATIONS_DIR, (err, files) => {
+fs.readdir(`${BASE_DIR}/${TRANSLATIONS_DIR}`, (err, files) => {
   if(!err) {
     files.forEach((file, index) => {
       if(!/^[a-z]{2}\.csv$/.test(file)) return
@@ -31,10 +33,10 @@ fs.readdir(TRANSLATIONS_DIR, (err, files) => {
 
       filesToParse.push(file)
       const translationObj = files.includes(jsonFilename)
-        ? JSON.parse(fs.readFileSync(`${TRANSLATIONS_DIR}/${jsonFilename}`, 'utf8'))
+        ? JSON.parse(fs.readFileSync(`${BASE_DIR}/${TRANSLATIONS_DIR}/${jsonFilename}`, 'utf8'))
         : {}
 
-      fs.createReadStream(`${TRANSLATIONS_DIR}/${file}`)
+      fs.createReadStream(`${BASE_DIR}/${TRANSLATIONS_DIR}/${file}`)
         .pipe(csv())
         .on('data', data => {
 
@@ -85,7 +87,7 @@ fs.readdir(TRANSLATIONS_DIR, (err, files) => {
         })
         .on('end', () => {
 
-          fs.writeFileSync(`${TRANSLATIONS_DIR}/${jsonFilename}`, JSON.stringify(translationObj, null, 2))
+          fs.writeFileSync(`${BASE_DIR}/${TRANSLATIONS_DIR}/${jsonFilename}`, JSON.stringify(translationObj, null, 2))
           console.log(`Created json file: ${jsonFilename}.`)
     
 
