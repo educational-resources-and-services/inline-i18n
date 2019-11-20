@@ -1,6 +1,26 @@
-const DIRS = [ 'backend', 'components', 'data', 'pages', 'util' ]
-const EXCLUDE_REGEX = /^editor\//
-const TRANSLATIONS_DIR = './static/translations'
+let PARSE_DIRS = [ 'src' ]
+let EXCLUDE_REGEX = /^$/
+let TRANSLATIONS_DIR = './translations'
+
+process.argv.forEach(option => {
+  const [ flag, value ] = option.split(/=/)
+  if(!value) return
+
+  switch(flag) {
+    case '--parse-dirs': {
+      PARSE_DIRS = value.split(/[ ,]/g).filter(Boolean)
+      break
+    }
+    case '--parse-exclude-regex': {
+      EXCLUDE_REGEX = new RegExp(value)
+      break
+    }
+    case '--translations-dir': {
+      TRANSLATIONS_DIR = value
+      break
+    }
+  }
+})
 
 /*
 
@@ -40,7 +60,7 @@ let defaultTranslationObj = {}
 
 // go through all files in src and extract calls to i18n()/i18nReact, building out the default json
 let allResults = {}
-Promise.all(DIRS.map(dir => new Promise(resolve => {
+Promise.all(PARSE_DIRS.map(dir => new Promise(resolve => {
   findInFiles.find(`i18n(?:React)?\\((?:[\\s\\n,]|\`(?:\\\\.|[^\`])*\`|"(?:\\\\.|[^"])*"|'(?:\\\\.|[^'])*')*`, dir, '\\.js$')
     .then(results => {
       allResults = {

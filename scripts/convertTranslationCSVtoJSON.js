@@ -1,4 +1,16 @@
-const TRANSLATIONS_DIR = './static/translations'
+let TRANSLATIONS_DIR = './translations'
+
+process.argv.forEach(option => {
+  const [ flag, value ] = option.split(/=/)
+  if(!value) return
+
+  switch(flag) {
+    case '--translations-dir': {
+      TRANSLATIONS_DIR = value
+      break
+    }
+  }
+})
 
 const fs = require('fs')
 const csv = require('csv-parser')
