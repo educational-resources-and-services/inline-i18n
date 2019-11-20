@@ -5,8 +5,9 @@ const fs = require('fs')
 const TRANSLATION_NEEDED = "TRANSLATION NEEDED"
 const BASE_DIR = path.resolve(__dirname, '../../..')
 let PARSE_DIRS = [ 'src' ]
-let EXCLUDE_REGEX = /^$/
+let PARSE_EXCLUDE_REGEX = /^$/
 let TRANSLATIONS_DIR = './translations'
+let TRANSLATION_FILE_EXCLUDE_REGEX = /^$/
 
 process.argv.forEach(option => {
   const [ flag, value ] = option.split(/=/)
@@ -18,11 +19,15 @@ process.argv.forEach(option => {
       break
     }
     case '--parse-exclude-regex': {
-      EXCLUDE_REGEX = new RegExp(value)
+      PARSE_EXCLUDE_REGEX = new RegExp(value)
       break
     }
     case '--translations-dir': {
       TRANSLATIONS_DIR = value
+      break
+    }
+    case '--translation-file-exclude-regex': {
+      TRANSLATION_FILE_EXCLUDE_REGEX = new RegExp(value)
       break
     }
   }
@@ -74,7 +79,7 @@ Promise.all(PARSE_DIRS.map(dir => new Promise(resolve => {
 
   for(let path in allResults) {
     if(/(?:^|\/)i18n(?:React)?\.js$/.test(path)) continue
-    if(EXCLUDE_REGEX.test(path)) continue
+    if(PARSE_EXCLUDE_REGEX.test(path)) continue
 
     const res = allResults[path]
     res.matches.forEach(match => {
@@ -131,6 +136,7 @@ Promise.all(PARSE_DIRS.map(dir => new Promise(resolve => {
       files.forEach((file, index) => {
         if(['en.json'].includes(file)) return
         if(files.includes(file.replace(/\.json$/, '-incomplete.json'))) return
+        if(TRANSLATION_FILE_EXCLUDE_REGEX.test(file)) return
 
         const lang = file.replace(/(?:\-incomplete)?\.json$/, '')
         const translationObj = JSON.parse(fs.readFileSync(`${BASE_DIR}/${TRANSLATIONS_DIR}/${file}`, 'utf8'))
