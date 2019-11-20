@@ -1,0 +1,24 @@
+{
+  "name": "inline-i18n",
+  "version": "0.1.0",
+  "description": "An i18n solution which keeps the English text inline within your code—where it should be. Works with frontend JavaScript, within React (including component swaps), and on Node.js.",
+  "main": "src/i18n.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/educational-resources-and-services/inline-i18n.git"
+  },
+  "keywords": [
+    "i18n",
+    "inline",
+    "react"
+  ],
+  "author": "Andy Hubert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/educational-resources-and-services/inline-i18n/issues"
+  },
+  "homepage": "https://github.com/educational-resources-and-services/inline-i18n#readme"
+}
