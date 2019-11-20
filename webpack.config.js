@@ -2,10 +2,13 @@
 var path = require('path');
 
 module.exports = {
-  entry: './src/i18nReact.js',
+  entry: {
+    i18n: './src/i18n.js',
+    i18nReact: './src/i18nReact.js',
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'i18nReact.js',
+    filename: '[name].js',
     libraryTarget: 'commonjs2',
   },
   module: {
