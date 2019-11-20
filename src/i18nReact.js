@@ -1,3 +1,4 @@
+import React from 'react'
 import { getPreSwapTranslation, textToHtml } from './i18n'
 
 const i18nReact = (...params) => {

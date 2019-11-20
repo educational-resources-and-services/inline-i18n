@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/educational-resources-and-services/inline-i18n/issues"
   },
-  "homepage": "https://github.com/educational-resources-and-services/inline-i18n#readme"
+  "homepage": "https://github.com/educational-resources-and-services/inline-i18n#readme",
+  "dependencies": {
+    "react": "^16.12.0"
+  }
 }
