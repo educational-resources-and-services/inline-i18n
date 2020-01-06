@@ -191,6 +191,56 @@ const i18n = (...params) => {
   return translatedText
 }
 
+const hebrewNums = Array(200)
+  .fill(0)
+  .map((x, idx) => {
+    let num = idx
+    let letters = ''
+
+    if(num >= 100) {
+      letters += 'ק'
+      num -= 100
+    }
+
+    if(num === 15) {
+      letters += 'טו'
+      num = 0
+    }
+
+    if(num === 16) {
+      letters += 'טז'
+      num = 0
+    }
+
+    if(num >= 10) {
+      letters += 'יכלמנסעפצ'.substr(parseInt(num / 10) - 1, 1)
+      num %= 10
+    }
+
+    if(num >= 1) {
+      letters += 'אבגדהוזחט'.substr(num - 1, 1)
+      num = 0
+    }
+
+    return letters
+  })
+
+const i18nNumber = ({ num, type, category }) => {
+
+  switch(getLocale(category)) {
+    case 'he': {
+
+      if(type === 'formal') {
+        return hebrewNums[num]
+      }
+
+      break
+    }
+  }
+
+  return num
+}
+
 module.exports = {
   i18n,
   i18nSetup,
@@ -201,4 +251,5 @@ module.exports = {
   i18nDump,
   getPreSwapTranslation,
   textToHtml,
+  i18nNumber,
 }
