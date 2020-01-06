@@ -72,7 +72,7 @@ const i18nSetup = ({ locales, prepDump, hydrate, ...params }) => new Promise(res
 
 const getLocale = category => (categorySpecificLocales[category] || globalLocale)
 
-const isRTL = locale => [ 'he', 'ar', 'dv', 'ku', 'fa', 'ur' ].includes(locale)
+const isRTL = locale => [ 'he', 'ar', 'dv', 'ku', 'fa', 'ur' ].includes(locale || globalLocale)
 
 const getTranslationsWithoutCategories = translationsInCategories => Object.assign({}, ...Object.values(translationsInCategories))
 
