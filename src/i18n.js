@@ -236,7 +236,7 @@ const i18nNumber = ({ num, type, category }) => {
   switch(getLocale(category)) {
     case 'he': {
 
-      if(type === 'formal') {
+      if([ 'formal', 'chapter' ].includes(type)) {
         return hebrewNums[num]
       }
 
