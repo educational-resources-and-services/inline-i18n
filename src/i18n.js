@@ -60,7 +60,7 @@ const i18nSetup = ({ locales, prepDump, hydrate, ...params }) => new Promise(res
     })
   }
 
-  if((locales ||[]).length > 0) {
+  if((locales || []).length > 0) {
     return Promise.all(locales.map(locale => setLocale({ locale })))
       .then(() => {
         setLocale({ locale: locales[0] }).then(resolve)
