@@ -42,7 +42,7 @@ let translationModifier = str => str
 
 // get determineUILanguageId and setUpI18n from elsewhere, when I develop it
 
-const i18nSetup = ({ locales, prepDump, hydrate, ...params }) => new Promise(resolve => {
+const i18nSetup = ({ locales, translations, prepDump, hydrate, ...params }) => new Promise(resolve => {
   fetchLocale = params.fetchLocale
   localesUrl = params.localesUrl
   determineLocaleFromOptions = params.determineLocaleFromOptions
@@ -50,6 +50,12 @@ const i18nSetup = ({ locales, prepDump, hydrate, ...params }) => new Promise(res
 
   if(prepDump && !translationsToDump) {
     translationsToDump = {}
+  }
+
+  if(translations) {
+    Object.keys(translations).forEach(locale => {
+      allTranslations[locale] = getTranslationsWithoutCategories(translations[locale])
+    })
   }
 
   if(hydrate) {
