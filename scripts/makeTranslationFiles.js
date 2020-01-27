@@ -159,7 +159,7 @@ Promise.all(PARSE_DIRS.map(dir => new Promise(resolve => {
                   }
                 } else {  // can we put it in a different category?
                   Object.keys(newTranslationObj).forEach(alternateCategory => {
-                    if(translationObj[alternateCategory][engText] !== undefined) return  // that category already translates this eng text
+                    if((translationObj[alternateCategory] || {})[engText] !== undefined) return  // that category already translates this eng text
                     if(newTranslationObj[alternateCategory][engText] === 'object') {
                       for(let desc in translationObj[category][engText]) {
                         if(newTranslationObj[alternateCategory][engText][desc] !== undefined) {
@@ -180,7 +180,7 @@ Promise.all(PARSE_DIRS.map(dir => new Promise(resolve => {
                   newTranslationObj[category][engText] = translationObj[category][engText]
                 } else {  // can we put it in a different category?
                   Object.keys(newTranslationObj).forEach(alternateCategory => {
-                    if(translationObj[alternateCategory][engText] !== undefined) return  // that category already translates this eng text
+                    if((translationObj[alternateCategory] || {})[engText] !== undefined) return  // that category already translates this eng text
                     if(newTranslationObj[alternateCategory][engText] === 'object') {
                       if(newTranslationObj[alternateCategory][engText][""] !== undefined) {
                         newTranslationObj[alternateCategory][engText][""] = translationObj[category][engText]
