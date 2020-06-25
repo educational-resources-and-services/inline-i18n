@@ -1,7 +1,9 @@
 import React from 'react'
-import { getPreSwapTranslation, textToHtml } from './i18n'
+import getI18nByNamespace from './i18n'
 
-const i18nReact = (...params) => {
+const getI18nReactByNamespace = namespace => (...params) => {
+
+  const { getPreSwapTranslation, textToHtml } = getI18nByNamespace(namespace)
 
   if(params.length === 0) return ""
 
@@ -41,5 +43,10 @@ const i18nReact = (...params) => {
   return translatedPieces
 }
 
+const defaultI18nReact = getI18nReactByNamespace('default')
 
-export default i18nReact
+for(let key in defaultI18nReact) {
+  getI18nReactByNamespace[key] = defaultI18nReact[key]
+}
+
+export default getI18nReactByNamespace
