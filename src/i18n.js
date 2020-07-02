@@ -102,6 +102,9 @@ const getI18nSandbox = () => {
 
   const isRTL = locale => [ 'he', 'ar', 'dv', 'ku', 'fa', 'ur' ].includes(locale || globalLocale)
 
+  const getRTLAdjustedRight = locale => isRTL(locale) ? 'left' : 'right'
+  const getRTLAdjustedLeft = locale => isRTL(locale) ? 'right' : 'left'
+
   const getTranslationsWithoutCategories = translationsInCategories => Object.assign({}, ...Object.values(translationsInCategories))
 
   const setLocale = ({ locale, category }) => {
@@ -274,6 +277,8 @@ const getI18nSandbox = () => {
     i18nSetup,
     getLocale,
     isRTL,
+    getRTLAdjustedRight,
+    getRTLAdjustedLeft,
     setLocale,
     i18nPrefetch,
     i18nDump,
