@@ -52,10 +52,7 @@ fs.readdir(`${BASE_DIR}/${TRANSLATIONS_DIR}`, (err, files) => {
             translationSwaps.length !== textToTranslateSwaps.length
             || (
               translationSwaps.length > 1
-              && (
-                [...new Set(translationSwaps)].length !== translationSwaps.length
-                || translationSwaps.some(swap => !textToTranslateSwaps.includes(swap))
-              )
+              && translationSwaps.some(swap => !textToTranslateSwaps.includes(swap))
             )
           ) {
             console.log('')
