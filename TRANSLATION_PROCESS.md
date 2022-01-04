@@ -7,7 +7,7 @@
 ### Part 2: Create the JSON file for translation
 
 ### Part 3: Export translation file (creating a Google spreadsheet of i18n messages that still need translation)
-1. **before running translate, make sure that any existing csv files ARE DELETED (both `{{language}}.csv` and `{{language}}-incomplete.csv`), for ALL the langauges, whether there have been new translations or not.**
+1. **before running translate, make sure that any existing csv files, and -incomplete.json ARE DELETED (both `{{language}}.csv` and `{{language}}-incomplete.csv` and `{{language}}-incomplete.json`), for ALL the langauges, whether there have been new translations or not.**
 2. in terminal: `npm run translate`
 3. you will now have new `{{language}}-incomplete.csv` files for each language json file.
 4. all of the new files need to imported to spreadsheets, because there are always code changes happening that can affect the translation sheets, so they should always be updated to make sure they are accurate.
