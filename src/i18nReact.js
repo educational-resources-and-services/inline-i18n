@@ -21,7 +21,7 @@ const getI18nReactByNamespace = namespace => (...params) => {
 
   const translatedPieces = translatedText
     .split(/({{(?:[^}]+)}})/g)
-    .map(piece => {
+    .map((piece, idx) => {
 
       const [ x, swapVar ] = piece.match(/^{{([^}]+)}}$/) || []
 
@@ -29,7 +29,7 @@ const getI18nReactByNamespace = namespace => (...params) => {
         return (
           swaps[swapVar] !== undefined
             ? (
-              <React.Fragment key={swapVar}>
+              <React.Fragment key={idx}>
                 {swaps[swapVar]}
               </React.Fragment>
             )
