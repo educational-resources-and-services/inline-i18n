@@ -11,9 +11,9 @@
     "update-patch": "npm run go-update-patch -s",
     "update-minor": "npm run go-update-minor -s",
     "update-major": "npm run go-update-major -s",
-    "go-update-patch": "echo '-------------------------------------------\nUpdate version (PATCH) and deploy to npm...\n-------------------------------------------\n' && npm run confirm && npm i && npm version patch && npm run publish-to-npm",
-    "go-update-minor": "echo '-------------------------------------------\nUpdate version (MINOR) and deploy to npm...\n-------------------------------------------\n' && npm run confirm && npm i && npm version minor && npm run publish-to-npm",
-    "go-update-major": "echo '-------------------------------------------\nUpdate version (MAJOR) and deploy to npm...\n-------------------------------------------\n' && npm run confirm && npm i && npm version major && npm run publish-to-npm",
+    "go-update-patch": "echo '-------------------------------------------\nUpdate version (PATCH) and deploy to npm...\n-------------------------------------------\n' && npm run confirm && npm i && npm run build && npm version patch && npm run publish-to-npm",
+    "go-update-minor": "echo '-------------------------------------------\nUpdate version (MINOR) and deploy to npm...\n-------------------------------------------\n' && npm run confirm && npm i && npm run build && npm version minor && npm run publish-to-npm",
+    "go-update-major": "echo '-------------------------------------------\nUpdate version (MAJOR) and deploy to npm...\n-------------------------------------------\n' && npm run confirm && npm i && npm run build && npm version major && npm run publish-to-npm",
     "publish-to-npm": "npm publish --access public && echo '\nSUCCESS!\n'"
   },
   "repository": {
