@@ -1,6 +1,6 @@
 {
   "name": "inline-i18n",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "An i18n solution which keeps the English text inline within your code—where it should be. Works with frontend JavaScript, within React (including component swaps), and on Node.js.",
   "main": "build/i18n.js",
   "scripts": {
@@ -15,7 +15,6 @@
     "go-update-minor": "echo '-------------------------------------------\nUpdate version (MINOR) and deploy to npm...\n-------------------------------------------\n' && npm run confirm && npm i && npm version minor && npm run publish-to-npm",
     "go-update-major": "echo '-------------------------------------------\nUpdate version (MAJOR) and deploy to npm...\n-------------------------------------------\n' && npm run confirm && npm i && npm version major && npm run publish-to-npm",
     "publish-to-npm": "npm publish --access public && echo '\nSUCCESS!\n'"
-
   },
   "repository": {
     "type": "git",
