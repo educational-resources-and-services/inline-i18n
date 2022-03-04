@@ -6,7 +6,16 @@
   "scripts": {
     "start": "webpack --watch",
     "build": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "confirm": "read -p 'Are you sure? ' -n 1 -r && echo '\n' && [[ $REPLY =~ ^[Yy]$ ]]",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update-patch": "npm run go-update-patch -s",
+    "update-minor": "npm run go-update-minor -s",
+    "update-major": "npm run go-update-major -s",
+    "go-update-patch": "echo '-------------------------------------------\nUpdate version (PATCH) and deploy to npm...\n-------------------------------------------\n' && npm run confirm && npm i && npm version patch && npm run publish-to-npm",
+    "go-update-minor": "echo '-------------------------------------------\nUpdate version (MINOR) and deploy to npm...\n-------------------------------------------\n' && npm run confirm && npm i && npm version minor && npm run publish-to-npm",
+    "go-update-major": "echo '-------------------------------------------\nUpdate version (MAJOR) and deploy to npm...\n-------------------------------------------\n' && npm run confirm && npm i && npm version major && npm run publish-to-npm",
+    "publish-to-npm": "npm publish --access public && echo '\nSUCCESS!\n'"
+
   },
   "repository": {
     "type": "git",
