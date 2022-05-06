@@ -17,6 +17,7 @@
   The translator will write in the right-hand column the translation for everything NOT IN tags.
   For our example, the translation into Spanish would look like: `"Sí, conviértase en socio de responsabilidad para {{name}}"`
   (note that the tage {{name}} is not translated)
+8. NOTE! Delete all rows that are for the category 'gp', we do not need translations for these.
 
 
 ### Part 4: Import the completed translations 
