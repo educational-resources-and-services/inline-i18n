@@ -33,9 +33,9 @@ Any codebase which may be imported into another must import i18n with a namespac
 ```js
 // Normal import examples:
 import { i18n } from 'inline-i18n'
-import i18nReact from 'inline-i18n/build/i18nReact'
+import { i18nReact } from 'inline-i18n/build/i18nReact'
 
 // Import examples for a library named `my-library`:
 const { i18n } = require('inline-i18n')('my-library')
-const i18nReact = require('inline-i18n/build/i18nReact')('my-library')
+const { i18nReact } = require('inline-i18n/build/i18nReact')('my-library')
 ```
