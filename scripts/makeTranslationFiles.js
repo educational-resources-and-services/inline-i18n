@@ -93,6 +93,12 @@ Promise.all(PARSE_DIRS.map(dir => new Promise(resolve => {
 
       const engText = parts[1].replace(/^["'](.*)["']$/, '$1').replace(/\\(.)/g, '$1')
       const desc = (parts[2] || "").replace(/^["'](.*)["']$/, '$1').replace(/\\(.)/g, '$1')
+
+      if(desc.length > 255) {
+        console.log(`i18n desc too long in ${path}: ${match}`, parts)
+        process.exit()
+      }
+
       let category = (parts[3] || "default").replace(/^["'](.*)["']$/, '$1').replace(/\\(.)/g, '$1')
 
       for(let c in defaultTranslationObj) {
@@ -100,6 +106,11 @@ Promise.all(PARSE_DIRS.map(dir => new Promise(resolve => {
           category = c
           break
         }
+      }
+
+      if(category.length > 50) {
+        console.log(`i18n category too long in ${path}: ${match}`, parts)
+        process.exit()
       }
 
       if(!defaultTranslationObj[category]) {
