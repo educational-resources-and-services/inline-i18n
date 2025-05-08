@@ -30,8 +30,9 @@
 6. in terminal: `npm run translate-convert-csv-to-json`
   output in terminal will indicate which files were run, as well as any invalid translations (which are ignored).
   The new translations will autmatically be brought into the existing {{language}}.json file.
-7. review the affected json files to make sure that everything was copied/edited correctly.
-8. delete the new {{language}}.csv files that you just brought in, and commit the new json files.
+7. Because the incomplete.json files will not automatically update, you will need to copy the data from each new {{language}}.json file to the pertaining {{language}}-incomplete.json file.
+8. review the affected json files to make sure that everything was copied/edited correctly.
+9. delete the new {{language}}.csv files that you just brought in, and commit the new json files.
 
 
 #### NOTE: Though written in the order of first exporting to a spreadsheet and then importing from the spreadsheet, after the initial creation of the json files and exporting to a spreadsheet, the process will generally run opposite. As translators do their work, you will start by bringing in newly translated messages (Part 4), then creating new incomplete.csv files to export so that translation can continue (Part 3).
