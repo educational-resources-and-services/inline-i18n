@@ -142,7 +142,13 @@ const getI18nSandbox = () => {
     const translations = allTranslations[localeToUse] || {}
     const translationSet = translations[str]
     
-    if(translationSet === undefined) {
+    if(
+      translationSet === undefined
+      || (
+        typeof translationSet !== `string`
+        && typeof translationSet[desc] !== `string`
+      )
+    ) {
       return str
 
     } else {
@@ -150,7 +156,7 @@ const getI18nSandbox = () => {
         translationsToDump[localeToUse] = {}
       }
 
-      if(translationSet[desc] === undefined) {
+      if(typeof translationSet === `string`) {
         if(translationsToDump) {
           translationsToDump[localeToUse][str] = translationSet
         }
